@@ -484,11 +484,24 @@ RMSE = √( (1/N) ∑[ (X_GNSS - X_True)² + (Y_GNSS - Y_True)² + (Z_GNSS - Z_T
 
 - **Urban**: Broadcast/IONEX/QZSS/SBAS methods made no difference. TEC estimation decreased Q=1 due to possible real-time noise. Iono-Free LC severely degraded results.
 - **Dynamic**: Less impact overall. Iono-Free LC still degraded Q=1 entirely.
+<p align="center">
+  <img src="images/21.jpg" alt=" " width="500" />
+</p>
 
 #### Tropospheric Correction
 
 - **Urban**: Estimation (ZTD/ZTD+) slightly reduced Q=1. Model-based methods had no improvement.
 - **Dynamic**: ZTD estimation increased Q=1, showing real-time estimation is more effective in dynamic conditions.
+
+<p align="center">
+  <img src="images/22.png" alt=" " width="500" />
+</p>
+<p align="center">
+  <img src="images/23.png" alt=" " width="500" />
+</p>
+<p align="center">
+  <img src="images/24.png" alt=" " width="500" />
+</p>
 
 #### Satellite Ephemeris/Clock
 
