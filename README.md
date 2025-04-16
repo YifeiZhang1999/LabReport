@@ -576,15 +576,15 @@ While the **ground truth** is unknown, combining satellite systems produces:
 
 ### Figures
 
-- **Whampoa Dataset:** Horizontal position estimation using different satellite systems
+**Whampoa Dataset:** Horizontal position estimation using different satellite systems
 <p align="center">
   <img src="images/25.png" alt=" " width="500" />
 </p>
-- **Whampoa Dataset:** Estimation error comparison  
+**Whampoa Dataset:** Estimation error comparison  
 <p align="center">
   <img src="images/26.png" alt=" " width="500" />
 </p>
-- **Kowloon Tong Dataset:** Horizontal position estimation with combined systems  
+**Kowloon Tong Dataset:** Horizontal position estimation with combined systems  
 <p align="center">
   <img src="images/27.png" alt=" " width="500" />
 </p>
