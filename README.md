@@ -116,11 +116,23 @@ This document presents the results of parameter tuning in a GNSS positioning exp
 ##### L1 + L2/E5b
 - Slightly lower accuracy than L1-only.
 
+<p align="center">
+  <img src="images/4.png" alt=" " width="500" />
+</p>
+
 ##### L1 + L2/E5b + L5/E5a
 - Comparable to above, but still slightly lower than L1-only.
 
+<p align="center">
+  <img src="images/5.png" alt=" " width="500" />
+</p>
+
 #### L1 + L2/E5b + L5/E5a + L6
 - Similar accuracy, slightly lower than L1-only.
+
+<p align="center">
+  <img src="images/6.png" alt=" " width="500" />
+</p>
 
 #### Conclusion
 
@@ -151,8 +163,16 @@ While multi-frequency modes should theoretically outperform single-frequency set
 ##### Forward Filter
 - Standard accuracy with initial convergence limitations.
 
+<p align="center">
+  <img src="images/7.png" alt=" " width="500" />
+</p>
+
 ##### Backward Filter
 - Improved accuracy over forward filtering.
+
+<p align="center">
+  <img src="images/8.png" alt=" " width="500" />
+</p>
 
 ##### Combined Filter
 - **Highest positioning accuracy**.
@@ -160,6 +180,10 @@ While multi-frequency modes should theoretically outperform single-frequency set
   - Corrects convergence issues.
   - Smooths out noise.
   - Resolves ambiguities more effectively.
+ 
+<p align="center">
+  <img src="images/9.png" alt=" " width="500" />
+</p>
 
 ---
 
