@@ -1,8 +1,6 @@
 # LabReport
 This is the lab report for Satellite Communication and Navigation course
 
-Here’s a clean and well-structured **README** version of your document content:
-
 ---
 
 ## 1. GNSS Positioning Modes Analysis
@@ -71,7 +69,7 @@ Here’s your content reformatted into a clean and structured **README.md** form
 
 ---
 
-## 2.
+## 2. GNSS Frequencies and Filter Type
 
 ### Overview
 
@@ -199,7 +197,7 @@ Absolutely! Here's the **English version** of the README with **image placeholde
 
 ---
 
-## 3.
+## 3. GNSS Masks, Dynamics and correction
 
 ### 🛠️ Parameters Tuned
 
@@ -316,7 +314,7 @@ Sure! Here's your content converted into a structured and clean **README.md** fo
 
 ---
 
-## 4.
+## 4. GNSS Iono and Tropo correction
 
 ### Overview
 
