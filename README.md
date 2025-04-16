@@ -5,7 +5,7 @@ Here’s a clean and well-structured **README** version of your document content
 
 ---
 
-## GNSS Positioning Modes Analysis
+## 1. GNSS Positioning Modes Analysis
 
 ### Parameters Tuned
 
@@ -66,3 +66,107 @@ A second figure compares positioning performance across five modes: **DGPS, Kine
 - **DGPS Mode**:
   - Consistently Q=4 (differential corrections only), no phase ambiguity resolution.
   - Sub-meter level accuracy, suitable for moderate-precision tasks.
+
+Here’s your content reformatted into a clean and structured **README.md** format using Markdown:
+
+---
+
+## 2.
+
+### Overview
+
+This document presents the results of parameter tuning in a GNSS positioning experiment under the **PPP Kinematic mode**. Two primary parameters were tested:
+
+1. **Frequencies**
+2. **Filter Type**
+
+---
+
+### 1. Frequencies
+
+#### Overview of GPS Frequency Bands
+
+- **L1 (1575.42 MHz):** Public C/A code + military P(Y) code.
+- **L2 (1227.60 MHz):** Originally military-only, now includes civilian L2C.
+- **L5 (1176.45 MHz):** High-precision civilian use (e.g., aviation, railways).
+- **L3 (1381.05 MHz):** Used for nuclear monitoring.
+- **L4 (1379.913 MHz):** Experimental, for ionospheric studies.
+- **L6 (1278.75 MHz):** Used by augmentation systems like Japan’s QZSS.
+
+**Galileo Frequencies:**
+- **E5a & E5b:** Used by the EU’s Galileo system; E5a matches GPS L5.
+
+#### Frequency Options in Lab
+
+- L1
+- L1 + L2/E5b
+- L1 + L2/E5b + L5/E5a
+- L1 + L2/E5b + L5/E5a + L6
+
+> Note: When selecting one frequency option, other configurations are left at default settings.
+
+#### Results
+
+##### L1 Only
+- Achieved **highest positioning accuracy**.
+
+- <img src="images/3.png" alt="" width="500" />
+
+##### L1 + L2/E5b
+- Slightly lower accuracy than L1-only.
+
+##### L1 + L2/E5b + L5/E5a
+- Comparable to above, but still slightly lower than L1-only.
+
+#### L1 + L2/E5b + L5/E5a + L6
+- Similar accuracy, slightly lower than L1-only.
+
+#### Conclusion
+
+While multi-frequency modes should theoretically outperform single-frequency setups, in this case, **L1-only yielded the best accuracy**. Possible reasons include:
+
+- Data quality
+- Satellite geometry
+- Software processing settings
+- Convergence time
+
+---
+
+### 2. Filter Type
+
+#### Filter Types Tested
+
+- **Forward Filtering**  
+  Processes data chronologically. Common in real-time applications.
+
+- **Backward Filtering**  
+  Processes data in reverse. Useful in post-processing for refining accuracy.
+
+- **Combined Filtering**  
+  Merges forward and backward filtering for highest accuracy (post-processing only).
+
+#### Results (Under PPP Kinematic mode, using L1 Frequencies)
+
+##### Forward Filter
+- Standard accuracy with initial convergence limitations.
+
+##### Backward Filter
+- Improved accuracy over forward filtering.
+
+##### Combined Filter
+- **Highest positioning accuracy**.
+- Benefits:
+  - Corrects convergence issues.
+  - Smooths out noise.
+  - Resolves ambiguities more effectively.
+
+---
+
+### Final Notes
+
+The study showed that:
+- **L1-only frequency** provided the **best results** in this particular PPP Kinematic context.
+- **Combined filtering** is the **most accurate filtering strategy**.
+
+These outcomes highlight how parameter tuning can lead to unexpected yet insightful results in GNSS processing.
+
