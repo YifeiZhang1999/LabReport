@@ -32,8 +32,8 @@ Positioning Mode refers to the strategy used by a GNSS (Global Navigation Satell
 #### Urban Dataset
 
 <p align="center">
-  <img src="images/1/1.jpg" alt="GNSS lat/lon tracking result" width="300" />
-  <img src="images/1/2.jpg" alt="GNSS estimation error" width="300" />
+  <img src="images/1.png" alt="GNSS lat/lon tracking result" width="300" />
+  <img src="images/2.png" alt="GNSS estimation error" width="300" />
 </p>
 
 ##### GNSS Track Comparison
