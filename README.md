@@ -516,4 +516,102 @@ RMSE = √( (1/N) ∑[ (X_GNSS - X_True)² + (Y_GNSS - Y_True)² + (Z_GNSS - Z_T
 - **Future Work**: Consider integrating **machine learning-based adaptive correction models** for better environmental adaptability, while balancing computational efficiency.
 
 
+Sure! Here's your content reformatted into a clean and structured **README.md** format using Markdown:
+
+---
+
+## 5.RAIM FDE and Satellite Selection in RTKLIB
+
+### RAIM FDE
+
+#### Description
+
+RAIM FDE (Receiver Autonomous Integrity Monitoring Fault Detection and Exclusion) is an optional algorithm available in RTKLIB. The core concept of RAIM is to use satellite redundancy to detect and exclude faulty satellites. By doing so, the system maintains continuity and improves both the **accuracy** and **integrity** of position estimates.
+
+- **Fault Detection:** Identifies unreliable satellite signals.
+- **Fault Exclusion:** Automatically removes faulty satellites from the positioning calculation.
+- **Integrity Assurance:** Helps prevent potentially dangerous outcomes from incorrect estimations.
+
+#### Results
+
+Activating RAIM FDE did **not** affect the position estimation results in the tested scenarios. This implies that no satellite faults were detected — a normal outcome, given the low probability of satellite faults in practice.
+
+---
+
+### Satellite Selection
+
+#### Description
+
+The number of available satellites depends on satellite visibility and receiver support. Factors affecting satellite availability include:
+
+- **Obstructions** (e.g., buildings)
+- **Receiver limitations**
+- **Frequency selection** (e.g., not all satellites operate on the L1 band)
+
+In general:
+
+- **More satellites** → **Better accuracy** (due to extra redundancy)
+- **More satellites** → **Higher processing time**
+
+##### Computational Complexity
+
+- **Acquisition & Tracking:** `O(n)`  
+- **Positioning (WLS or EKF):** `O(n²)`  
+Where `n` is the number of satellites.
+
+##### Supported Navigation Systems in RTKLIB
+
+| System     | Ownership              | Active Satellites |
+|------------|------------------------|-------------------|
+| GPS        | United States          | 31                |
+| GLONASS    | Russia                 | 24                |
+| Galileo    | European Union         | 24                |
+| BeiDou     | China                  | 30                |
+| QZSS       | Japan (Optional)       | -                 |
+| SBAS       | Various (Augmentation) | -                 |
+| IRNSS      | India (Optional)       | -                 |
+
+> *Note: QZSS, SBAS, and IRNSS were not detected in the Whampoa dataset and thus did not contribute to the measurements.*
+
+#### Results
+
+##### Whampoa Dataset
+
+Average estimation errors (using only one satellite system):
+
+- **GPS:** 16.3 m  
+- **GLONASS:** 15.9 m  
+- **Galileo:** 36.0 m  
+- **BeiDou:** 10.4 m  
+
+Key Observations:
+
+- Certain locations show large error spikes, likely due to **NLOS (Non-Line-of-Sight)** conditions (e.g., tall buildings).
+- Systems with fewer than three visible satellites at times became **unavailable**.
+- **Combining all systems** reduces average error to **6.5 m** and corrects many error spikes via redundancy.
+
+##### Kowloon Tong Dataset
+
+While the **ground truth** is unknown, combining satellite systems produces:
+
+- A **smoother trajectory**
+- An **estimated path** that aligns well with the road
+- More **consistent and realistic** results than using any single system
+
+### Figures
+
+- **Whampoa Dataset:** Horizontal position estimation using different satellite systems
+<p align="center">
+  <img src="images/25.png" alt=" " width="500" />
+</p>
+- **Whampoa Dataset:** Estimation error comparison  
+<p align="center">
+  <img src="images/26.png" alt=" " width="500" />
+</p>
+- **Kowloon Tong Dataset:** Horizontal position estimation with combined systems  
+<p align="center">
+  <img src="images/27.png" alt=" " width="500" />
+</p>
+
+---
 
