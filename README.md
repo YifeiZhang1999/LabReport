@@ -110,7 +110,7 @@ This document presents the results of parameter tuning in a GNSS positioning exp
 ##### L1 Only
 - Achieved **highest positioning accuracy**.
 
-- <img src="images/3.png" alt="" width="500" />
+<img src="images/3.png" alt="" width="500" />
 
 ##### L1 + L2/E5b
 - Slightly lower accuracy than L1-only.
