@@ -5,11 +5,11 @@ Here’s a clean and well-structured **README** version of your document content
 
 ---
 
-# GNSS Positioning Modes Analysis
+## GNSS Positioning Modes Analysis
 
-## Parameters Tuned
+### Parameters Tuned
 
-### Positioning Mode Overview
+#### Positioning Mode Overview
 Positioning Mode refers to the strategy used by a GNSS (Global Navigation Satellite System) receiver or algorithm to estimate a user's location. Different modes affect satellite data processing, correction methods, and achievable accuracy.
 
 | Mode           | Description |
@@ -27,11 +27,11 @@ Positioning Mode refers to the strategy used by a GNSS (Global Navigation Satell
 
 ---
 
-## Results
+### Results
 
-### Urban Dataset
+#### Urban Dataset
 
-#### GNSS Track Comparison
+##### GNSS Track Comparison
 
 A comparative figure (not included here) shows GNSS tracks overlaid on an OpenStreetMap basemap for various positioning modes.
 
@@ -44,7 +44,7 @@ A comparative figure (not included here) shows GNSS tracks overlaid on an OpenSt
 
 ---
 
-#### Mode Comparison Across Urban Scenario
+##### Mode Comparison Across Urban Scenario
 
 A second figure compares positioning performance across five modes: **DGPS, Kinematic, Single, Static-start, and Static**.
 
