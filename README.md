@@ -195,3 +195,122 @@ The study showed that:
 
 These outcomes highlight how parameter tuning can lead to unexpected yet insightful results in GNSS processing.
 
+Absolutely! Here's the **English version** of the README with **image placeholders** included so you can easily plug in plots or diagrams later:
+
+---
+
+## 3.
+
+### 🛠️ Parameters Tuned
+
+#### Elevation Mask / SNR Mask
+
+- **Elevation Mask**: Minimum satellite elevation angle (range: 0°–70°, step: 5°).
+- **SNR Mask**: Minimum Signal-to-Noise Ratio (SNR) threshold to filter out weak or noisy satellite signals.
+
+> Proper adjustment of these masks can help improve GNSS signal quality and positioning accuracy.
+
+<p align="center">
+  <img src="images/10.png" alt=" " width="500" />
+</p>
+---
+
+#### Rec Dynamics / Earth Tides Correction
+
+- **Rec Dynamics**: Corrects for motion of the receiver (velocity, acceleration, rotation).
+- **Earth Tides Correction**:
+  - **OFF**: No correction
+  - **Solid**: Corrects for solid Earth deformation due to tidal forces
+  - **Solid/OTL**: Adds Ocean Tide Loading for coastal/ocean regions
+
+> These corrections help improve precision, especially in dynamic or high-accuracy environments.
+
+<p align="center">
+  <img src="images/11.png" alt=" " width="500" />
+</p>
+
+---
+
+### Accuracy Evaluation Metrics
+
+#### 1. Position Quality Indicator (Q)
+
+| Q Value | Description                        | Accuracy Level     |
+|---------|------------------------------------|--------------------|
+| 1       | Fixed RTK                          | Centimeter-level   |
+| 2       | Float RTK                          | Decimeter-level    |
+| 3       | SBAS                               | 1–3 meters         |
+| 4       | DGPS                               | 0.5–3 meters       |
+| 5       | Single GNSS                        | 3–50 meters        |
+| 6       | PPP (Precise Point Positioning)    | Centimeter–Decimeter |
+
+> Q=1 is best, Q=2 is acceptable, Q=4 or higher indicates lower accuracy.
+
+<p align="center">
+  <img src="images/12.png" alt=" " width="500" />
+</p>
+
+---
+
+#### 2. RMSE (Root Mean Square Error)
+
+Used to compare GNSS trajectory results against ground truth from the dataset.
+
+<p align="center">
+  <img src="images/13.png" alt=" " width="500" />
+</p>
+
+---
+
+### Impact of Parameter Changes
+
+#### Elevation Mask / SNR Mask
+
+##### Urban Dataset
+
+- Elevation Mask from **25°–35°** improved Q=1 significantly.
+- Higher than 50° caused Q=2 to drop sharply due to fewer visible satellites.
+
+##### Dynamic Dataset
+
+- Lower Elevation Masks (0°–15°) maintain more stable Q=1 and Q=2.
+- Higher masks remove noisy signals but reduce available satellites, hurting accuracy.
+
+<p align="center">
+  <img src="images/14.png" alt=" " width="500" />
+</p>
+---
+
+#### Rec Dynamics / Earth Tides Correction
+
+- Enabling these corrections greatly improved **Q=2** results.
+- **Q=4** remained largely unaffected.
+
+<p align="center">
+  <img src="images/15.png" alt=" " width="500" />
+</p>
+
+---
+
+###  Analysis & Recommendations
+
+#### Elevation Mask / SNR Mask
+
+- Recommended Elevation Mask: **10°–15°**
+- This provides a good balance between satellite count and signal quality.
+
+#### Rec Dynamics & Earth Tides Correction
+
+- Should be enabled in **dynamic environments** or **high-precision applications**.
+- Major improvements observed in Q=2 when these are turned ON.
+
+---
+
+### Conclusion
+
+Careful tuning of Elevation Mask, SNR Mask, and enabling dynamic corrections (Rec Dynamics + Earth Tides) can significantly enhance the accuracy and stability of GNSS positioning in varying environmental conditions.
+
+---
+
+Would you like me to save this as a downloadable `.md` file for you? Or would you like help inserting actual images into this layout?
+
