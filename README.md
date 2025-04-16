@@ -1,5 +1,7 @@
 # Lab Report: Satellite Communication and Navigation Course
 
+## Group 8: LO Long Yin, DU Hang, ZHANG Yifei, LOU Tengda, ZHAO Xinge, and ZHOU Huaiyuan
+
 This document presents the lab report for the Satellite Communication and Navigation course, detailing the analysis of GNSS positioning modes, frequencies, filter types, and corrections.
 
 ---
