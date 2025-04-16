@@ -312,5 +312,195 @@ Careful tuning of Elevation Mask, SNR Mask, and enabling dynamic corrections (Re
 
 ---
 
-Would you like me to save this as a downloadable `.md` file for you? Or would you like help inserting actual images into this layout?
+Sure! Here's your content converted into a structured and clean **README.md** format using markdown syntax:
+
+---
+
+## 4.
+
+### Overview
+
+This report presents the evaluation of GNSS positioning accuracy under different correction configurations for ionospheric and tropospheric effects, and satellite ephemeris/clock data sources. Both **Urban** and **Dynamic** datasets are analyzed.
+
+---
+
+### Parameters Tuned
+
+#### 1. Ionospheric Correction
+
+The ionosphere (50–1000 km above Earth) slows and refracts GNSS signals due to free electrons, introducing delays influenced by solar activity, time, and location.
+
+| Option           | Description |
+|------------------|-------------|
+| `OFF`            | Disables ionospheric correction; results in lower accuracy. |
+| `Broadcast`      | Uses satellite broadcast models (e.g., Klobuchar); limited improvement (~50%). |
+| `SBAS`           | Satellite-Based Augmentation System; more accurate than broadcast. |
+| `Iono-Free LC`   | Uses dual-frequency observations to cancel ionospheric delay; high-precision. |
+| `Estimate TEC`   | Estimates Total Electron Content from data; improves precision. |
+| `IONEX TEC`      | Uses global TEC maps (IONEX) from sources like IGS. |
+| `QZSS Broadcast` | Uses Japan’s QZSS ionospheric correction; requires QZSS support. |
+
+---
+
+#### 2. Tropospheric Correction
+
+The troposphere (0–50 km) affects all GNSS signals equally through temperature, pressure, and humidity changes.
+
+| Option            | Description |
+|-------------------|-------------|
+| `OFF`             | No correction applied. |
+| `Saastamoinen`    | Uses Saastamoinen model; good for high-precision applications. |
+| `SBAS`            | Applies SBAS correction. |
+| `Estimate ZTD`    | Real-time Zenith Tropospheric Delay estimation. |
+| `Estimate ZTD+`   | Enhanced ZTD estimation with meteorological data. |
+
+---
+
+#### 3. Satellite Ephemeris / Clock Data
+
+These determine satellite positioning and time error corrections.
+
+| Option               | Description |
+|----------------------|-------------|
+| `Broadcast`          | GNSS satellite-transmitted data; meter-level accuracy. |
+| `Precise`            | IGS-provided precise orbits; centimeter-level accuracy. |
+| `Broadcast+SBAS`     | Enhanced broadcast with SBAS corrections. |
+| `Broadcast+SSR APC`  | Adds SSR Antenna Phase Center corrections. |
+| `Broadcast+SSR CoM`  | Adds SSR Center of Mass corrections. |
+| `QZSS LEX`           | Uses QZSS LEX signal; requires support. |
+
+---
+
+### Precision Evaluation Index
+
+#### 1. Position Quality (Q)
+
+| Q Value | Description | Accuracy |
+|---------|-------------|----------|
+| 1       | Fixed RTK   | Centimeter |
+| 2       | Float RTK   | Decimeter |
+| 3       | SBAS        | 1–3 meters |
+| 4       | DGPS        | 0.5–3 meters |
+| 5       | Single      | 3–50 meters |
+| 6       | PPP         | Centimeter–decimeter |
+
+- **In this study**, Q=1 is considered the most accurate, Q=2 acceptable, and Q ≥ 4 as low accuracy.
+
+#### 2. RMSE (Root Mean Square Error)
+
+Evaluates GNSS vs. ground truth:
+```
+RMSE = √( (1/N) ∑[ (X_GNSS - X_True)² + (Y_GNSS - Y_True)² + (Z_GNSS - Z_True)² ] )
+```
+
+---
+
+### Experimental Results
+
+#### 1. Ionospheric Correction
+
+##### Urban Dataset
+
+| Method           | Q=1 | Q=2 | Q=4 | Analysis |
+|------------------|-----|-----|-----|----------|
+| OFF              | 459 | 735 | 344 | Baseline |
+| Broadcast        | 459 | 735 | 344 | No effect |
+| Estimate TEC     | 318 ↓30% | 877 ↑19% | 343 ≈ | Noise affects ambiguity resolution |
+| IONEX TEC        | 459 | 735 | 344 | No effect (possibly misconfigured) |
+| Iono-Free LC     | 0 ↓100% | 240 ↓67% | 1157 ↑236% | Accuracy degrades |
+| QZSS / SBAS      | 459 | 735 | 344 | No effect |
+
+<p align="center">
+  <img src="images/15.png" alt=" " width="500" />
+</p>
+<p align="center">
+  <img src="images/16.png" alt=" " width="500" />
+</p>
+
+##### Dynamic Dataset
+
+| Method           | Q=1 | Q=2 | Q=4 | Analysis |
+|------------------|-----|-----|-----|----------|
+| OFF              | 91  | 70  | 44  | Baseline |
+| Broadcast        | 91  | 70  | 44  | No effect |
+| Estimate TEC     | 87 ≈ | 74 ↑6% | 44 = | Minor effect |
+| IONEX TEC        | 91  | 70  | 44  | No effect |
+| Iono-Free LC     | 0 ↓100% | 51 ↓27% | 154 ↑250% | Accuracy degrades |
+| QZSS / SBAS      | 91  | 70  | 44  | No effect |
+
+<p align="center">
+  <img src="images/17.png" alt=" " width="500" />
+</p>
+
+---
+
+#### 2. Tropospheric Correction
+
+##### Urban Dataset
+
+| Method           | Q=1 | Q=2 | Q=4 | Analysis |
+|------------------|-----|-----|-----|----------|
+| OFF              | 459 | 735 | 344 | Baseline |
+| Estimate ZTD     | 415 ↓10% | 780 ↑6% | 343 ≈ | Estimation noise observed |
+| Estimate ZTD+    | 425 ↓7% | 770 ↑5% | 343 ≈ | Similar to ZTD |
+| Saastamoinen     | 459 | 735 | 344 | No effect |
+| SBAS             | 459 | 735 | 344 | No effect |
+
+<p align="center">
+  <img src="images/18.png" alt=" " width="500" />
+</p>
+<p align="center">
+  <img src="images/19.png" alt=" " width="500" />
+</p>
+
+##### Dynamic Dataset
+
+| Method           | Q=1 | Q=2 | Q=4 | Analysis |
+|------------------|-----|-----|-----|----------|
+| OFF              | 91  | 70  | 44  | Baseline |
+| Estimate ZTD     | 103 ↑13% | 58 ↓17% | 44 ≈ | Real-time correction effective |
+| Estimate ZTD+    | 103 ↑13% | 58 ↓17% | 44 ≈ | Consistent with ZTD |
+| Saastamoinen     | 91  | 70  | 44  | No effect |
+| SBAS             | 91  | 70  | 44  | No effect |
+
+<p align="center">
+  <img src="images/20.png" alt=" " width="500" />
+</p>
+---
+
+#### 3. Satellite Ephemeris / Clock
+
+| Ephemeris Method        | Urban (Q1/Q2/Q4) | Dynamic (Q1/Q2/Q4) | Notes |
+|-------------------------|------------------|---------------------|-------|
+| Broadcast               | 459 / 735 / 344  | 91 / 70 / 44        | Baseline |
+| Broadcast + SBAS        | 459 / 735 / 344  | 91 / 70 / 44        | No effect |
+| Precise / SSR / LEX     | Failed           | Failed              | Processing errors |
+
+---
+
+### Analysis & Insights
+
+#### Ionospheric Correction
+
+- **Urban**: Broadcast/IONEX/QZSS/SBAS methods made no difference. TEC estimation decreased Q=1 due to possible real-time noise. Iono-Free LC severely degraded results.
+- **Dynamic**: Less impact overall. Iono-Free LC still degraded Q=1 entirely.
+
+#### Tropospheric Correction
+
+- **Urban**: Estimation (ZTD/ZTD+) slightly reduced Q=1. Model-based methods had no improvement.
+- **Dynamic**: ZTD estimation increased Q=1, showing real-time estimation is more effective in dynamic conditions.
+
+#### Satellite Ephemeris/Clock
+
+- Methods requiring SSR/LEX/Precise data failed due to errors. Broadcast + SBAS showed no improvement, possibly due to inactive SBAS.
+
+---
+
+### Recommendations
+
+- **Data Quality**: In urban environments with poor satellite visibility (<6), correction methods may introduce false correlations. Multipath effects further reduce accuracy.
+- **Model Adaptability**: Traditional correction models lack environmental adaptability.
+- **Future Work**: Consider integrating **machine learning-based adaptive correction models** for better environmental adaptability, while balancing computational efficiency.
+
+
 
