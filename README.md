@@ -1,29 +1,27 @@
-# LabReport
-This is the lab report for Satellite Communication and Navigation course
+# Lab Report: Satellite Communication and Navigation Course
+
+This document presents the lab report for the Satellite Communication and Navigation course, detailing the analysis of GNSS positioning modes, frequencies, filter types, and corrections.
 
 ---
 
 ## 1. GNSS Positioning Modes Analysis
 
-### Parameters Tuned
+### Overview of Positioning Modes
 
-#### Positioning Mode Overview
-Positioning Mode refers to the strategy used by a GNSS (Global Navigation Satellite System) receiver or algorithm to estimate a user's location. Different modes affect satellite data processing, correction methods, and achievable accuracy.
+Positioning modes refer to the strategies employed by GNSS (Global Navigation Satellite System) receivers to estimate a user's location. Each mode influences satellite data processing, correction methods, and achievable accuracy.
 
-| Mode           | Description |
-|----------------|-------------|
-| **Single**     | Basic positioning using one GNSS receiver with broadcast satellite data. Accuracy is meter-level. Uses only pseudorange observations. |
-| **DGPS/DGNSS** | Differential GNSS with pseudorange corrections from a known reference station. Sub-meter accuracy. |
-| **Kinematic**  | Uses carrier-phase observations and differential corrections. Solves integer ambiguities for centimeter-level precision. |
-| **Static**     | RTK mode for stationary receivers. Commonly used to establish base station positions. |
-| **Static-Start** | Begins in static mode, then switches to kinematic post-initialization. Useful when starting from a rest position. |
-| **Moving-Base** | Both rover and base stations are mobile. Used for relative positioning between two moving platforms. |
-| **Fixed**      | Base station at a known, fixed location used to provide RTK corrections. |
-| **PPP Kinematic** | Precise Point Positioning for moving receivers, requiring precise satellite data but no nearby base station. |
-| **PPP Static** | Static version of PPP for long-term, high-accuracy fixed-point positioning. |
-| **PPP Fixed**  | PPP with integer-fixed carrier-phase ambiguities for improved accuracy. |
-
----
+| Mode                | Description                                                                                     |
+|---------------------|-------------------------------------------------------------------------------------------------|
+| **Single**          | Basic positioning using one GNSS receiver with broadcast satellite data. Accuracy is meter-level. |
+| **DGPS/DGNSS**      | Differential GNSS with pseudorange corrections from a known reference station. Sub-meter accuracy. |
+| **Kinematic**       | Utilizes carrier-phase observations and differential corrections for centimeter-level precision. |
+| **Static**          | RTK mode for stationary receivers, commonly used to establish base station positions.          |
+| **Static-Start**    | Begins in static mode, then switches to kinematic post-initialization. Useful for starting from a rest position. |
+| **Moving-Base**     | Both rover and base stations are mobile, used for relative positioning between two moving platforms. |
+| **Fixed**           | Base station at a known, fixed location providing RTK corrections.                             |
+| **PPP Kinematic**   | Precise Point Positioning for moving receivers, requiring precise satellite data but no nearby base station. |
+| **PPP Static**      | Static version of PPP for long-term, high-accuracy fixed-point positioning.                    |
+| **PPP Fixed**       | PPP with integer-fixed carrier-phase ambiguities for improved accuracy.                        |
 
 ### Results
 
@@ -40,7 +38,7 @@ A comparative figure (not included here) shows GNSS tracks overlaid on an OpenSt
 
 - **Missing Results**: PPP Kinematic, PPP Static, and PPP Fixed modes failed to generate outputs—likely due to missing precise satellite data or inadequate quality (e.g., no dual-frequency phase observations).
 - **Top Performer**: **Kinematic mode** delivered the most accurate trajectory, aligning closely with the road network and maintaining minimal deviation.
-- **Worst Performer**: **Static mode** diverged significantly. Since it assumes a stationary receiver, it fails when applied to a dynamic dataset (e.g., walking or driving), resulting in poor ambiguity resolution and unrealistic estimates.
+- **Worst Performer**: **Static mode** diverged significantly, as it assumes a stationary receiver, leading to poor ambiguity resolution and unrealistic estimates when applied to dynamic datasets.
 
 > **Kinematic mode Q-values**:  
 > Q = 2 (float solution) in **20.85%** of observations — higher than all other modes.
@@ -65,34 +63,30 @@ A second figure compares positioning performance across five modes: **DGPS, Kine
   - Consistently Q=4 (differential corrections only), no phase ambiguity resolution.
   - Sub-meter level accuracy, suitable for moderate-precision tasks.
 
-Here’s your content reformatted into a clean and structured **README.md** format using Markdown:
-
 ---
 
 ## 2. GNSS Frequencies and Filter Type
 
 ### Overview
 
-This document presents the results of parameter tuning in a GNSS positioning experiment under the **PPP Kinematic mode**. Two primary parameters were tested:
+This section presents the results of parameter tuning in a GNSS positioning experiment under the **PPP Kinematic mode**. Two primary parameters were tested:
 
 1. **Frequencies**
 2. **Filter Type**
-
----
 
 ### 1. Frequencies
 
 #### Overview of GPS Frequency Bands
 
-- **L1 (1575.42 MHz):** Public C/A code + military P(Y) code.
-- **L2 (1227.60 MHz):** Originally military-only, now includes civilian L2C.
-- **L5 (1176.45 MHz):** High-precision civilian use (e.g., aviation, railways).
-- **L3 (1381.05 MHz):** Used for nuclear monitoring.
-- **L4 (1379.913 MHz):** Experimental, for ionospheric studies.
-- **L6 (1278.75 MHz):** Used by augmentation systems like Japan’s QZSS.
+- **L1 (1575.42 MHz)**: Public C/A code + military P(Y) code.
+- **L2 (1227.60 MHz)**: Originally military-only, now includes civilian L2C.
+- **L5 (1176.45 MHz)**: High-precision civilian use (e.g., aviation, railways).
+- **L3 (1381.05 MHz)**: Used for nuclear monitoring.
+- **L4 (1379.913 MHz)**: Experimental, for ionospheric studies.
+- **L6 (1278.75 MHz)**: Used by augmentation systems like Japan’s QZSS.
 
 **Galileo Frequencies:**
-- **E5a & E5b:** Used by the EU’s Galileo system; E5a matches GPS L5.
+- **E5a & E5b**: Used by the EU’s Galileo system; E5a matches GPS L5.
 
 #### Frequency Options in Lab
 
@@ -113,21 +107,18 @@ This document presents the results of parameter tuning in a GNSS positioning exp
 
 ##### L1 + L2/E5b
 - Slightly lower accuracy than L1-only.
-
 <p align="center">
   <img src="images/4.png" alt=" " width="500" />
 </p>
 
 ##### L1 + L2/E5b + L5/E5a
 - Comparable to above, but still slightly lower than L1-only.
-
 <p align="center">
   <img src="images/5.png" alt=" " width="500" />
 </p>
 
-#### L1 + L2/E5b + L5/E5a + L6
+##### L1 + L2/E5b + L5/E5a + L6
 - Similar accuracy, slightly lower than L1-only.
-
 <p align="center">
   <img src="images/6.png" alt=" " width="500" />
 </p>
@@ -147,27 +138,20 @@ While multi-frequency modes should theoretically outperform single-frequency set
 
 #### Filter Types Tested
 
-- **Forward Filtering**  
-  Processes data chronologically. Common in real-time applications.
-
-- **Backward Filtering**  
-  Processes data in reverse. Useful in post-processing for refining accuracy.
-
-- **Combined Filtering**  
-  Merges forward and backward filtering for highest accuracy (post-processing only).
+- **Forward Filtering**: Processes data chronologically. Common in real-time applications.
+- **Backward Filtering**: Processes data in reverse. Useful in post-processing for refining accuracy.
+- **Combined Filtering**: Merges forward and backward filtering for highest accuracy (post-processing only).
 
 #### Results (Under PPP Kinematic mode, using L1 Frequencies)
 
 ##### Forward Filter
 - Standard accuracy with initial convergence limitations.
-
 <p align="center">
   <img src="images/7.png" alt=" " width="500" />
 </p>
 
 ##### Backward Filter
 - Improved accuracy over forward filtering.
-
 <p align="center">
   <img src="images/8.png" alt=" " width="500" />
 </p>
@@ -178,7 +162,6 @@ While multi-frequency modes should theoretically outperform single-frequency set
   - Corrects convergence issues.
   - Smooths out noise.
   - Resolves ambiguities more effectively.
- 
 <p align="center">
   <img src="images/9.png" alt=" " width="500" />
 </p>
@@ -193,11 +176,9 @@ The study showed that:
 
 These outcomes highlight how parameter tuning can lead to unexpected yet insightful results in GNSS processing.
 
-Absolutely! Here's the **English version** of the README with **image placeholders** included so you can easily plug in plots or diagrams later:
-
 ---
 
-## 3. GNSS Masks, Dynamics and correction
+## 3. GNSS Masks, Dynamics, and Correction
 
 ### 🛠️ Parameters Tuned
 
@@ -211,11 +192,12 @@ Absolutely! Here's the **English version** of the README with **image placeholde
 <p align="center">
   <img src="images/10.png" alt=" " width="500" />
 </p>
+
 ---
 
-#### Rec Dynamics / Earth Tides Correction
+#### Receiver Dynamics / Earth Tides Correction
 
-- **Rec Dynamics**: Corrects for motion of the receiver (velocity, acceleration, rotation).
+- **Receiver Dynamics**: Corrects for motion of the receiver (velocity, acceleration, rotation).
 - **Earth Tides Correction**:
   - **OFF**: No correction
   - **Solid**: Corrects for solid Earth deformation due to tidal forces
@@ -233,16 +215,16 @@ Absolutely! Here's the **English version** of the README with **image placeholde
 
 #### 1. Position Quality Indicator (Q)
 
-| Q Value | Description                        | Accuracy Level     |
-|---------|------------------------------------|--------------------|
-| 1       | Fixed RTK                          | Centimeter-level   |
-| 2       | Float RTK                          | Decimeter-level    |
-| 3       | SBAS                               | 1–3 meters         |
-| 4       | DGPS                               | 0.5–3 meters       |
-| 5       | Single GNSS                        | 3–50 meters        |
-| 6       | PPP (Precise Point Positioning)    | Centimeter–Decimeter |
+| Q Value | Description         | Accuracy Level        |
+|---------|---------------------|-----------------------|
+| 1       | Fixed RTK           | Centimeter-level      |
+| 2       | Float RTK           | Decimeter-level       |
+| 3       | SBAS                | 1–3 meters            |
+| 4       | DGPS                | 0.5–3 meters          |
+| 5       | Single GNSS         | 3–50 meters           |
+| 6       | PPP (Precise Point Positioning) | Centimeter–Decimeter |
 
-> Q=1 is best, Q=2 is acceptable, Q=4 or higher indicates lower accuracy.
+> Q=1 is best, Q=2 is acceptable, and Q ≥ 4 indicates lower accuracy.
 
 <p align="center">
   <img src="images/12.png" alt=" " width="500" />
@@ -277,9 +259,10 @@ Used to compare GNSS trajectory results against ground truth from the dataset.
 <p align="center">
   <img src="images/14.png" alt=" " width="500" />
 </p>
+
 ---
 
-#### Rec Dynamics / Earth Tides Correction
+#### Receiver Dynamics / Earth Tides Correction
 
 - Enabling these corrections greatly improved **Q=2** results.
 - **Q=4** remained largely unaffected.
@@ -290,14 +273,14 @@ Used to compare GNSS trajectory results against ground truth from the dataset.
 
 ---
 
-###  Analysis & Recommendations
+### Analysis & Recommendations
 
 #### Elevation Mask / SNR Mask
 
 - Recommended Elevation Mask: **10°–15°**
 - This provides a good balance between satellite count and signal quality.
 
-#### Rec Dynamics & Earth Tides Correction
+#### Receiver Dynamics & Earth Tides Correction
 
 - Should be enabled in **dynamic environments** or **high-precision applications**.
 - Major improvements observed in Q=2 when these are turned ON.
@@ -306,19 +289,15 @@ Used to compare GNSS trajectory results against ground truth from the dataset.
 
 ### Conclusion
 
-Careful tuning of Elevation Mask, SNR Mask, and enabling dynamic corrections (Rec Dynamics + Earth Tides) can significantly enhance the accuracy and stability of GNSS positioning in varying environmental conditions.
+Careful tuning of Elevation Mask, SNR Mask, and enabling dynamic corrections (Receiver Dynamics + Earth Tides) can significantly enhance the accuracy and stability of GNSS positioning in varying environmental conditions.
 
 ---
 
-Sure! Here's your content converted into a structured and clean **README.md** format using markdown syntax:
-
----
-
-## 4. GNSS Iono and Tropo correction
+## 4. GNSS Ionospheric and Tropospheric Correction
 
 ### Overview
 
-This report presents the evaluation of GNSS positioning accuracy under different correction configurations for ionospheric and tropospheric effects, and satellite ephemeris/clock data sources. Both **Urban** and **Dynamic** datasets are analyzed.
+This report evaluates GNSS positioning accuracy under different correction configurations for ionospheric and tropospheric effects, as well as satellite ephemeris/clock data sources. Both **Urban** and **Dynamic** datasets are analyzed.
 
 ---
 
@@ -328,15 +307,15 @@ This report presents the evaluation of GNSS positioning accuracy under different
 
 The ionosphere (50–1000 km above Earth) slows and refracts GNSS signals due to free electrons, introducing delays influenced by solar activity, time, and location.
 
-| Option           | Description |
-|------------------|-------------|
-| `OFF`            | Disables ionospheric correction; results in lower accuracy. |
-| `Broadcast`      | Uses satellite broadcast models (e.g., Klobuchar); limited improvement (~50%). |
-| `SBAS`           | Satellite-Based Augmentation System; more accurate than broadcast. |
-| `Iono-Free LC`   | Uses dual-frequency observations to cancel ionospheric delay; high-precision. |
-| `Estimate TEC`   | Estimates Total Electron Content from data; improves precision. |
-| `IONEX TEC`      | Uses global TEC maps (IONEX) from sources like IGS. |
-| `QZSS Broadcast` | Uses Japan’s QZSS ionospheric correction; requires QZSS support. |
+| Option              | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| `OFF`               | Disables ionospheric correction; results in lower accuracy.                |
+| `Broadcast`         | Uses satellite broadcast models (e.g., Klobuchar); limited improvement (~50%). |
+| `SBAS`              | Satellite-Based Augmentation System; more accurate than broadcast.         |
+| `Iono-Free LC`     | Uses dual-frequency observations to cancel ionospheric delay; high-precision. |
+| `Estimate TEC`      | Estimates Total Electron Content from data; improves precision.            |
+| `IONEX TEC`        | Uses global TEC maps (IONEX) from sources like IGS.                       |
+| `QZSS Broadcast`    | Uses Japan’s QZSS ionospheric correction; requires QZSS support.          |
 
 ---
 
@@ -344,13 +323,13 @@ The ionosphere (50–1000 km above Earth) slows and refracts GNSS signals due to
 
 The troposphere (0–50 km) affects all GNSS signals equally through temperature, pressure, and humidity changes.
 
-| Option            | Description |
-|-------------------|-------------|
-| `OFF`             | No correction applied. |
-| `Saastamoinen`    | Uses Saastamoinen model; good for high-precision applications. |
-| `SBAS`            | Applies SBAS correction. |
-| `Estimate ZTD`    | Real-time Zenith Tropospheric Delay estimation. |
-| `Estimate ZTD+`   | Enhanced ZTD estimation with meteorological data. |
+| Option              | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| `OFF`               | No correction applied.                                                     |
+| `Saastamoinen`      | Uses Saastamoinen model; good for high-precision applications.            |
+| `SBAS`              | Applies SBAS correction.                                                  |
+| `Estimate ZTD`      | Real-time Zenith Tropospheric Delay estimation.                           |
+| `Estimate ZTD+`     | Enhanced ZTD estimation with meteorological data.                         |
 
 ---
 
@@ -358,14 +337,14 @@ The troposphere (0–50 km) affects all GNSS signals equally through temperature
 
 These determine satellite positioning and time error corrections.
 
-| Option               | Description |
-|----------------------|-------------|
-| `Broadcast`          | GNSS satellite-transmitted data; meter-level accuracy. |
-| `Precise`            | IGS-provided precise orbits; centimeter-level accuracy. |
-| `Broadcast+SBAS`     | Enhanced broadcast with SBAS corrections. |
-| `Broadcast+SSR APC`  | Adds SSR Antenna Phase Center corrections. |
-| `Broadcast+SSR CoM`  | Adds SSR Center of Mass corrections. |
-| `QZSS LEX`           | Uses QZSS LEX signal; requires support. |
+| Option                     | Description                                                                 |
+|----------------------------|-----------------------------------------------------------------------------|
+| `Broadcast`                | GNSS satellite-transmitted data; meter-level accuracy.                     |
+| `Precise`                  | IGS-provided precise orbits; centimeter-level accuracy.                   |
+| `Broadcast+SBAS`           | Enhanced broadcast with SBAS corrections.                                  |
+| `Broadcast+SSR APC`        | Adds SSR Antenna Phase Center corrections.                                 |
+| `Broadcast+SSR CoM`        | Adds SSR Center of Mass corrections.                                       |
+| `QZSS LEX`                 | Uses QZSS LEX signal; requires support.                                    |
 
 ---
 
@@ -373,23 +352,22 @@ These determine satellite positioning and time error corrections.
 
 #### 1. Position Quality (Q)
 
-| Q Value | Description | Accuracy |
-|---------|-------------|----------|
-| 1       | Fixed RTK   | Centimeter |
-| 2       | Float RTK   | Decimeter |
-| 3       | SBAS        | 1–3 meters |
-| 4       | DGPS        | 0.5–3 meters |
-| 5       | Single      | 3–50 meters |
-| 6       | PPP         | Centimeter–decimeter |
+| Q Value | Description         | Accuracy       |
+|---------|---------------------|----------------|
+| 1       | Fixed RTK           | Centimeter     |
+| 2       | Float RTK           | Decimeter      |
+| 3       | SBAS                | 1–3 meters     |
+| 4       | DGPS                | 0.5–3 meters   |
+| 5       | Single              | 3–50 meters    |
+| 6       | PPP                  | Centimeter–decimeter |
 
 - **In this study**, Q=1 is considered the most accurate, Q=2 acceptable, and Q ≥ 4 as low accuracy.
 
 #### 2. RMSE (Root Mean Square Error)
 
 Evaluates GNSS vs. ground truth:
-```
 RMSE = √( (1/N) ∑[ (X_GNSS - X_True)² + (Y_GNSS - Y_True)² + (Z_GNSS - Z_True)² ] )
-```
+
 
 ---
 
@@ -399,14 +377,14 @@ RMSE = √( (1/N) ∑[ (X_GNSS - X_True)² + (Y_GNSS - Y_True)² + (Z_GNSS - Z_T
 
 ##### Urban Dataset
 
-| Method           | Q=1 | Q=2 | Q=4 | Analysis |
-|------------------|-----|-----|-----|----------|
-| OFF              | 459 | 735 | 344 | Baseline |
-| Broadcast        | 459 | 735 | 344 | No effect |
-| Estimate TEC     | 318 ↓30% | 877 ↑19% | 343 ≈ | Noise affects ambiguity resolution |
-| IONEX TEC        | 459 | 735 | 344 | No effect (possibly misconfigured) |
-| Iono-Free LC     | 0 ↓100% | 240 ↓67% | 1157 ↑236% | Accuracy degrades |
-| QZSS / SBAS      | 459 | 735 | 344 | No effect |
+| Method              | Q=1 | Q=2 | Q=4 | Analysis |
+|---------------------|-----|-----|-----|----------|
+| OFF                  | 459 | 735 | 344 | Baseline |
+| Broadcast            | 459 | 735 | 344 | No effect |
+| Estimate TEC        | 318 ↓30% | 877 ↑19% | 343 ≈ | Noise affects ambiguity resolution |
+| IONEX TEC           | 459 | 735 | 344 | No effect (possibly misconfigured) |
+| Iono-Free LC        | 0 ↓100% | 240 ↓67% | 1157 ↑236% | Accuracy degrades |
+| QZSS / SBAS         | 459 | 735 | 344 | No effect |
 
 <p align="center">
   <img src="images/15.png" alt=" " width="500" />
@@ -417,14 +395,14 @@ RMSE = √( (1/N) ∑[ (X_GNSS - X_True)² + (Y_GNSS - Y_True)² + (Z_GNSS - Z_T
 
 ##### Dynamic Dataset
 
-| Method           | Q=1 | Q=2 | Q=4 | Analysis |
-|------------------|-----|-----|-----|----------|
-| OFF              | 91  | 70  | 44  | Baseline |
-| Broadcast        | 91  | 70  | 44  | No effect |
-| Estimate TEC     | 87 ≈ | 74 ↑6% | 44 = | Minor effect |
-| IONEX TEC        | 91  | 70  | 44  | No effect |
-| Iono-Free LC     | 0 ↓100% | 51 ↓27% | 154 ↑250% | Accuracy degrades |
-| QZSS / SBAS      | 91  | 70  | 44  | No effect |
+| Method              | Q=1 | Q=2 | Q=4 | Analysis |
+|---------------------|-----|-----|-----|----------|
+| OFF                  | 91  | 70  | 44  | Baseline |
+| Broadcast            | 91  | 70  | 44  | No effect |
+| Estimate TEC        | 87 ≈ | 74 ↑6% | 44 = | Minor effect |
+| IONEX TEC           | 91  | 70  | 44  | No effect |
+| Iono-Free LC        | 0 ↓100% | 51 ↓27% | 154 ↑250% | Accuracy degrades |
+| QZSS / SBAS         | 91  | 70  | 44  | No effect |
 
 <p align="center">
   <img src="images/17.png" alt=" " width="500" />
@@ -436,13 +414,13 @@ RMSE = √( (1/N) ∑[ (X_GNSS - X_True)² + (Y_GNSS - Y_True)² + (Z_GNSS - Z_T
 
 ##### Urban Dataset
 
-| Method           | Q=1 | Q=2 | Q=4 | Analysis |
-|------------------|-----|-----|-----|----------|
-| OFF              | 459 | 735 | 344 | Baseline |
-| Estimate ZTD     | 415 ↓10% | 780 ↑6% | 343 ≈ | Estimation noise observed |
-| Estimate ZTD+    | 425 ↓7% | 770 ↑5% | 343 ≈ | Similar to ZTD |
-| Saastamoinen     | 459 | 735 | 344 | No effect |
-| SBAS             | 459 | 735 | 344 | No effect |
+| Method              | Q=1 | Q=2 | Q=4 | Analysis |
+|---------------------|-----|-----|-----|----------|
+| OFF                  | 459 | 735 | 344 | Baseline |
+| Estimate ZTD        | 415 ↓10% | 780 ↑6% | 343 ≈ | Estimation noise observed |
+| Estimate ZTD+       | 425 ↓7% | 770 ↑5% | 343 ≈ | Similar to ZTD |
+| Saastamoinen         | 459 | 735 | 344 | No effect |
+| SBAS                 | 459 | 735 | 344 | No effect |
 
 <p align="center">
   <img src="images/18.png" alt=" " width="500" />
@@ -453,26 +431,27 @@ RMSE = √( (1/N) ∑[ (X_GNSS - X_True)² + (Y_GNSS - Y_True)² + (Z_GNSS - Z_T
 
 ##### Dynamic Dataset
 
-| Method           | Q=1 | Q=2 | Q=4 | Analysis |
-|------------------|-----|-----|-----|----------|
-| OFF              | 91  | 70  | 44  | Baseline |
-| Estimate ZTD     | 103 ↑13% | 58 ↓17% | 44 ≈ | Real-time correction effective |
-| Estimate ZTD+    | 103 ↑13% | 58 ↓17% | 44 ≈ | Consistent with ZTD |
-| Saastamoinen     | 91  | 70  | 44  | No effect |
-| SBAS             | 91  | 70  | 44  | No effect |
+| Method              | Q=1 | Q=2 | Q=4 | Analysis |
+|---------------------|-----|-----|-----|----------|
+| OFF                  | 91  | 70  | 44  | Baseline |
+| Estimate ZTD        | 103 ↑13% | 58 ↓17% | 44 ≈ | Real-time correction effective |
+| Estimate ZTD+       | 103 ↑13% | 58 ↓17% | 44 ≈ | Consistent with ZTD |
+| Saastamoinen         | 91  | 70  | 44  | No effect |
+| SBAS                 | 91  | 70  | 44  | No effect |
 
 <p align="center">
   <img src="images/20.png" alt=" " width="500" />
 </p>
+
 ---
 
 #### 3. Satellite Ephemeris / Clock
 
-| Ephemeris Method        | Urban (Q1/Q2/Q4) | Dynamic (Q1/Q2/Q4) | Notes |
-|-------------------------|------------------|---------------------|-------|
-| Broadcast               | 459 / 735 / 344  | 91 / 70 / 44        | Baseline |
-| Broadcast + SBAS        | 459 / 735 / 344  | 91 / 70 / 44        | No effect |
-| Precise / SSR / LEX     | Failed           | Failed              | Processing errors |
+| Ephemeris Method     | Urban (Q1/Q2/Q4) | Dynamic (Q1/Q2/Q4) | Notes |
+|----------------------|------------------|---------------------|-------|
+| Broadcast            | 459 / 735 / 344  | 91 / 70 / 44        | Baseline |
+| Broadcast + SBAS     | 459 / 735 / 344  | 91 / 70 / 44        | No effect |
+| Precise / SSR / LEX  | Failed           | Failed              | Processing errors |
 
 ---
 
@@ -513,12 +492,9 @@ RMSE = √( (1/N) ∑[ (X_GNSS - X_True)² + (Y_GNSS - Y_True)² + (Z_GNSS - Z_T
 - **Model Adaptability**: Traditional correction models lack environmental adaptability.
 - **Future Work**: Consider integrating **machine learning-based adaptive correction models** for better environmental adaptability, while balancing computational efficiency.
 
-
-Sure! Here's your content reformatted into a clean and structured **README.md** format using Markdown:
-
 ---
 
-## 5.RAIM FDE and Satellite Selection in RTKLIB
+## 5. RAIM FDE and Satellite Selection in RTKLIB
 
 ### RAIM FDE
 
@@ -526,9 +502,9 @@ Sure! Here's your content reformatted into a clean and structured **README.md** 
 
 RAIM FDE (Receiver Autonomous Integrity Monitoring Fault Detection and Exclusion) is an optional algorithm available in RTKLIB. The core concept of RAIM is to use satellite redundancy to detect and exclude faulty satellites. By doing so, the system maintains continuity and improves both the **accuracy** and **integrity** of position estimates.
 
-- **Fault Detection:** Identifies unreliable satellite signals.
-- **Fault Exclusion:** Automatically removes faulty satellites from the positioning calculation.
-- **Integrity Assurance:** Helps prevent potentially dangerous outcomes from incorrect estimations.
+- **Fault Detection**: Identifies unreliable satellite signals.
+- **Fault Exclusion**: Automatically removes faulty satellites from the positioning calculation.
+- **Integrity Assurance**: Helps prevent potentially dangerous outcomes from incorrect estimations.
 
 #### Results
 
@@ -553,21 +529,21 @@ In general:
 
 ##### Computational Complexity
 
-- **Acquisition & Tracking:** `O(n)`  
-- **Positioning (WLS or EKF):** `O(n²)`  
+- **Acquisition & Tracking**: `O(n)`  
+- **Positioning (WLS or EKF)**: `O(n²)`  
 Where `n` is the number of satellites.
 
 ##### Supported Navigation Systems in RTKLIB
 
-| System     | Ownership              | Active Satellites |
-|------------|------------------------|-------------------|
-| GPS        | United States          | 31                |
-| GLONASS    | Russia                 | 24                |
-| Galileo    | European Union         | 24                |
-| BeiDou     | China                  | 30                |
-| QZSS       | Japan (Optional)       | -                 |
-| SBAS       | Various (Augmentation) | -                 |
-| IRNSS      | India (Optional)       | -                 |
+| System   | Ownership       | Active Satellites |
+|----------|------------------|-------------------|
+| GPS      | United States     | 31                |
+| GLONASS  | Russia            | 24                |
+| Galileo   | European Union    | 24                |
+| BeiDou   | China             | 30                |
+| QZSS     | Japan (Optional)  | -                 |
+| SBAS     | Various (Augmentation) | -             |
+| IRNSS    | India (Optional)  | -                 |
 
 > *Note: QZSS, SBAS, and IRNSS were not detected in the Whampoa dataset and thus did not contribute to the measurements.*
 
@@ -577,10 +553,10 @@ Where `n` is the number of satellites.
 
 Average estimation errors (using only one satellite system):
 
-- **GPS:** 16.3 m  
-- **GLONASS:** 15.9 m  
-- **Galileo:** 36.0 m  
-- **BeiDou:** 10.4 m  
+- **GPS**: 16.3 m  
+- **GLONASS**: 15.9 m  
+- **Galileo**: 36.0 m  
+- **BeiDou**: 10.4 m  
 
 Key Observations:
 
@@ -612,4 +588,3 @@ While the **ground truth** is unknown, combining satellite systems produces:
 </p>
 
 ---
-
